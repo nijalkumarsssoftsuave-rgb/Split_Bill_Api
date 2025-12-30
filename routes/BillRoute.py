@@ -4,10 +4,14 @@ from service.BillService import BillService
 from schemas.BillSchema import BillCreate, BillOut
 from database import get_db
 from utils.security import get_current_user
+from dependencies.rate_limit import rate_limiter
+
+
 Billrouter = APIRouter()
 
-
-@Billrouter.post("/bills", response_model=BillOut)
+@Billrouter.post("/bills", 
+                 dependencies=[Depends(rate_limiter)],
+                 response_model=BillOut)
 def create_bill(
     bill: BillCreate,
     session: Session = Depends(get_db),

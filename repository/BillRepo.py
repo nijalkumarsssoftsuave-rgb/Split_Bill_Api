@@ -1,11 +1,9 @@
 from sqlalchemy.orm import Session
 from models.BillModel import Bill
+from .BaseRepo import BaseRespository
 
-
-class BillRepo:
-    def __init__(self, session: Session):
-        self.session = session
-
+class BillRepo(BaseRespository):
+    
     def create_bill(self, bill: Bill):
         self.session.add(bill)
         self.session.commit()

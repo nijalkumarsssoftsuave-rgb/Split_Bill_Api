@@ -1,7 +1,6 @@
 from bcrypt import checkpw, hashpw, gensalt
 import jwt
 import time
-
 from decouple import config
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -15,7 +14,6 @@ JWT_SECRET = config("JWT_SECRET")
 JWT_ALGORITHM = config("JWT_ALGORITHM")
 
 security = HTTPBearer()
-
 
 
 class AuthHelper(object):
@@ -54,9 +52,6 @@ class AuthHelper(object):
             print("JWT ERROR:", e)
             return None
 
-
-
-
 class hashingPass(object):
 
     @staticmethod
@@ -78,9 +73,9 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     session: Session = Depends(get_db)
 ):
-    """
-    Dependency to get logged-in user from JWT
-    """
+    # """
+    # Dependency to get logged-in user from JWT
+    # """
     token = credentials.credentials
 
     payload = AuthHelper.decode_jwt(token)

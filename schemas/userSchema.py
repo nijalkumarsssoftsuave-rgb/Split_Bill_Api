@@ -19,3 +19,12 @@ class UserInLogin(BaseModel):
 class UserWithToken(BaseModel):
     token:str
     token_type: Literal["bearer"] = "bearer"
+
+
+class UsageStatsOut(BaseModel):
+    user_id: int
+    method: str
+    count: int
+
+    class Config:
+        from_attributes = True

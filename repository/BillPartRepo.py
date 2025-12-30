@@ -1,11 +1,9 @@
 from sqlalchemy.orm import Session
 from models.BillPartModel import BillParticipant
 from schemas.BillPartSchema import BillParticipantCreate
+from .BaseRepo import BaseRespository
 
-class BillParticipantRepo:
-
-    def __init__(self, session: Session):
-        self.session = session
+class BillParticipantRepo(BaseRespository):
 
     def create(self, data: BillParticipantCreate):
         participant = BillParticipant(**data.dict())
